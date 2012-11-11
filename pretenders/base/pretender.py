@@ -1,4 +1,7 @@
-import argparse
+try:
+    import argparse
+except ImportError:
+    pass
 import socket
 
 from pretenders.base import (
@@ -43,6 +46,8 @@ class Pretender(object):
 
         Parse command line args and return the parsed object.
         """
+        if not 'argparse' in locals().keys():
+            raise NotImplementedError("Command line not available for you version of python")
         parser = argparse.ArgumentParser(description='Start the server')
         parser.add_argument('-H', '--host', dest='host', default='localhost',
                     help='host/IP to run the server on (default: localhost)')
